@@ -1,0 +1,136 @@
+body {
+    background-color: #DFCFBE;
+    width: 100%;
+    margin: auto;
+    color: #654321;
+    padding-top: 15px;
+    text-align: center;
+    line-height:2;
+    font-size: 20px;
+}
+h1 {
+    color: #006400;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 64px;
+    font-weight: 900;
+    text-align: center;
+    line-height: 5;
+}
+
+a {
+    color: red;
+}
+
+.container {
+    max-width: 1440px;
+    margin: auto;
+}
+
+ul {
+    margin-bottom: 0px !important;
+}
+
+ul {
+    list-style: none;
+}
+
+
+
+footer {
+    background-color: black;
+    color: white;
+    font-family: sans-serif;
+    line-height: 1.5;
+    text-align: center;
+    height: 100px;
+    margin-top: 60px;
+    position: absolute;
+    width: 100%;
+}
+.avatar {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+
+}
+.avatar img {
+    width: 30px;
+    padding-left: 5px;
+}
+.avatar span {
+    color: #654321;
+    font-weight: normal;
+    font-size: 1rem;
+    font-style: italic;
+
+}
+#navbar {
+    margin-top: 25px;
+}
+#navbar .container {
+    display: flex;
+    justify-content: space-between;/* let contents displayed opposite each other: HANZOVAN and NAVIGATION BAR*/
+    padding: 0px 10px;
+}
+
+/* making unordered list in one row instead of every new line for each item*/
+#navbar ul {
+    display: flex;
+}
+
+#navbar ul li {
+    padding: 15px;
+}
+
+#navbar ul li a {
+    color: #654321;
+    font-size: 1.5rem;
+    font-weight: normal;
+    line-height: 1.5;
+    font-family: fantasy;
+}
+#navbar ul li a: hover {
+    border-bottom: solid 2px darkorange;
+}
+
+.game {
+    position: block;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    padding-top: 15px;
+
+}
+
+section {
+    width: 100%;
+    margin: auto;
+    color: #654321;
+    padding-top: 15px;
+    padding-left: 230px;
+    padding-right: 230px;
+    text-align: center;
+    line-height:2;
+    font-size: 20px;
+}
+
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    object-fit: cover;
+}
+homepage-video .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.5);
+}

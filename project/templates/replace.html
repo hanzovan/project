@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    edit item
+
+{% endblock %}
+{% block main %}
+
+    <div class="container-fluid">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (USD)</th>
+                        <th>Bought</th>
+                        <th>Used (months)</th>
+                        <th>Replace date</th>
+                        <th>DEPR</th>
+                        <th>MAINT</th>
+                        <th>Book value (USD)</th>
+                        <th>Savings</th>
+                        <th>Warranty</th>
+                        <th>Brand of item</th>
+                        <th>Seller/Shop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+
+                        <tr>
+                            <td>{{ item['item'] }}</td>
+                            <td>{{ item['price'] }}</td>
+                            <td>{{ item['bought'] }}</td>
+                            <td>{{ item['used'] }}</td>
+                            <td>{{ item['should_replace'] }}</td>
+                            <td>{{ item['depreciation_per_month'] }}</td>
+                            <td>{{ item['maint'] }}</td>
+                            <td>{{ item['book_value'] }}</td>
+                            <td>{{ item['savings_should_have'] }}</td>
+                            <td>{{ item['warranty'] }}</td>
+                            <td>{{ item['brand'] }}</td>
+                            <td>{{ item['seller'] }}</td>
+                            <td>
+                                <form action="/replace_item" method="post" onSubmit="return confirm('Are you sure you want to replace this item?');">
+                                    <input name="id" type="hidden" value="{{item.id}}">
+                                    <input name="reason" autocomplete="off" placeholder="Why replace?" type="text">
+                                    <input name="sold" autocomplete="off" placeholder="Sold price" type="number" step="any">
+                                    <button class="btn btn-success" type="submit">Replace</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        <div style="text-align: left; margin-top: 40px; margin-left: 40px;">
+            <h6>Notes: </h6>
+            <ul>
+                <li><strong>Bought</strong>: the date you bought this item</li>
+                <li><strong>Replace date</strong>: the date you should replace the item due to lifetime (enter number of lifetime in month)</li>
+                <li><strong>MAINT</strong>: Maintenant cost per month for this item</li>
+                <li><strong>Warranty</strong>: is the date your warranty expire</li>
+                <li style="color: red;">Fields left unfilled will be counted as 0</li>
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock %}

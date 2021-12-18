@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    wishlist
+
+{% endblock %}
+{% block main %}
+
+    <div class="container-fluid">
+        {% if items | length < 1 %}
+            You have not added any item! Click <a href="/add_wishlist">Add item to wishlist</a>
+        {% else %}
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (USD)</th>
+                        <th>Lifetime (month)</th>
+                        <th>Monthly cost (USD)</th>
+                        <th>MAINT (USD)</th>
+                        <th>DEPR (USD)</th>
+                        <th>Brand of item</th>
+                        <th>Seller/Shop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+
+                        <tr>
+                            <td>{{ item['item'] }}</td>
+                            <td>{{ item['price'] }}</td>
+                            <td>{{ item['life'] }}</td>
+                            <td>{{ item['monthly_cost'] }}</td>
+                            <td>{{ item['maint'] }}</td>
+                            <td>{{ item['depr'] }}</td>
+                            <td>{{ item['brand'] }}</td>
+                            <td>{{ item['seller'] }}</td>
+                            <td>
+                                <form action="/pre_add_item_from_wishlist" method="post">
+                                    <input name="id" type="hidden" value="{{item.id}}">
+                                    <button class="btn btn-success" type="submit">Buy today</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/pre_edit_wishlist" method="post">
+                                    <input name="id" type="hidden" value="{{item.id}}">
+                                    <button class="btn btn-info" type="submit">Edit</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/delete_wishlist" method="post" onSubmit="return confirm('Are you really wish to delete this item ?');">
+                                    <input name="id" type="hidden" value="{{item.id}}">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <div style="text-align: left; margin-top: 40px; margin-left: 40px;">
+            <h6>Notes: </h6>
+            <ul>
+                <li><strong>Monthly cost</strong>: all monthly cost for this item including maintenance and depreciation</li>
+                <li><strong>MAINT</strong>: Maintenant cost per month for this item</li>
+                <li><strong>DEPR</strong>: Depreciation cost per month for this item</li>
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock %}

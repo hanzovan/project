@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    homepage
+
+{% endblock %}
+{% block main %}
+
+    <div class="container p-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Total items</th>
+                    <th>Total monthly expense</th>
+                    <th>Total MAINT</th>
+                    <th>Total DEPR (USD)</th>
+                    <th>Total savings(USD)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in user %}
+
+                    <tr>
+                        <td>{{ item['item_quantity'] }}</td>
+                        <td>{{ item['monthly_total'] }}</td>
+                        <td>{{ item['all_items_maint'] }}</td>
+                        <td>{{ item['total_depr'] }}</td>
+                        <td>{{ item['total_savings'] }}</td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+        {% if user[0]['item_quantity'] == 0 %}
+
+            You have not added any item yet, <a href="/add_item">Click here</a> to add more items!
+
+        {% endif %}
+        {% if user[0]['items_repl'] > 0 %}
+
+            <div style="color: red; margin-top: 40px">
+                You have
+
+                {% if user[0]['items_repl'] == 1 %}
+
+                    an item
+
+                {% else %}
+
+                    {{ user[0]['items_repl'] }} items
+
+                {% endif %}
+
+                need to be replaced in 30 days, <a href="/items_repl">Check now</a>
+            </div>
+
+        {% endif %}
+
+        <div style="text-align: left; margin-top: 40px">
+
+            <h6>Notes: </h6>
+
+            <ul>
+                <li><strong>Total items</strong>: quantity of items you currently have</li>
+                <li><strong>Total monthly expense</strong>: Sum up both of your replacement (or DEPR) and maintenance cost per month</li>
+                <li><strong>Total MAINT</strong>: Sum up all of your items maintenant cost per month</li>
+                <li><strong>Total DEPR</strong>: depreciation of all your items this month, this means you should put the same amount of money into your saving account this month</li>
+                <li><strong>Total savings</strong>: total amount of money should be currently in your bank account for replacing your items</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+{% endblock %}

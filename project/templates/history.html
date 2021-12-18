@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+
+    history
+
+{% endblock %}
+
+{% block main %}
+
+    <div class="container-fluid">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price (USD)</th>
+                    <th>Book value left (USD)</th>
+                    <th>Sold price (USD)</th>
+                    <th>Profit (USD)</th>
+                    <th>Bought Date</th>
+                    <th>Sold Date</th>
+                    <th>Replace reason</th>
+                    <th>Brand</th>
+                    <th>Seller/Shop</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+
+                    <tr>
+                        <td>{{ item['item'] }}</td>
+                        <td>{{ item['price'] }}</td>
+                        <td>{{ item['book_value'] }}</td>
+                        <td>{{ item['sold_price'] }}</td>
+                        <td>{{ item['profit'] }}</td>
+                        <td>{{ item['bought'] }}</td>
+                        <td>{{ item['sold'] }}</td>
+                        <td>{{ item['reason_replace'] }}</td>
+                        <td>{{ item['brand'] }}</td>
+                        <td>{{ item['seller'] }}</td>
+                        <td>
+                                <form action="/delete_history" method="post" onSubmit="return confirm('Do you really want to delete this item from history ?');">
+                                    <input name="id" type="hidden" value="{{item.id}}">
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

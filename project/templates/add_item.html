@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    add item
+
+{% endblock %}
+
+{% block main %}
+    <div class ="container p-5">
+        <form style="text-align: left; margin-left: 400px" action="/add_item" method="post">
+            <div class="form-group">
+                <strong>Item</strong> <span style="color: blue;">(require)</span>:
+                <input autocomplete="off" name="item_name" autofocus type="text">
+            </div>
+            <div class="form-group">
+                <strong>Price</strong> <span style="color: blue;">(require)</span>:
+                <input autocomplete="off" name="price" placeholder="How much you paid?" min="0" type="number" step="any">
+            </div>
+            <div class="form-group">
+                <strong>Bought</strong> <span style="color: blue;">(require)</span>:
+                <input autocomplete="off" name="bought" type="date">
+            </div>
+            <div class="form-group">
+                <strong>Lifetime</strong> (month) <span style="color: blue;">(require)</span>:
+                <input autocomplete="off" name="life" placeholder="time using is up to you" min="1" type="number">
+            </div>
+            <div class="form-group">
+                <strong>MAINT</strong>:
+                <input autocomplete="off" name="maint" placeholder="estimated per month" type="number" step="any">
+            </div>
+            <div class="form-group">
+                <strong>Warranty</strong>:
+                <input autocomplete="off" name="warranty" type="date">
+            </div>
+            <div class="form-group">
+                <strong>Brand</strong>:
+                <input autocomplete="off" name="brand" placeholder="item producer/maker" type="text">
+            </div>
+            <div class="form-group">
+                <strong>Seller/Shop</strong>:
+                <input autocomplete="off" name="seller" placeholder="Bought from whom?" type="text">
+            </div>
+            <button style="margin-left: 100px;" class="btn btn-success" type="submit">Add item</button>
+        </form>
+
+        <span style='color: red;'>Please note that we do not take into account the inflation or price changing in the market</span>
+
+        <div style="text-align: left; margin-top: 40px">
+            <h6>Notes: </h6>
+            <ul>
+                <li><strong>Bought</strong>: the date you bought this item</li>
+                <li><strong>Lifetime</strong>: the number of months you want to use this item until replacement</li>
+                <li><strong>MAINT</strong>: estimated maintenance cost per month</li>
+                <li><strong>Warranty</strong>: the date the item's warranty expire</li>
+            </ul>
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

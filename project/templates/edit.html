@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    edit item
+
+{% endblock %}
+{% block main %}
+
+    <div class="container-fluid">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (USD)</th>
+                        <th>Bought</th>
+                        <th>Replace date</th>
+                        <th>MAINT</th>
+                        <th>Warranty</th>
+                        <th>Brand of item</th>
+                        <th>Seller/Shop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+
+                        <tr>
+                            <td>{{ item['item'] }}</td>
+                            <td>{{ item['price'] }}</td>
+                            <td>{{ item['bought'] }}</td>
+                            <td>{{ item['should_replace'] }}</td>
+                            <td>{{ item['maint'] }}</td>
+                            <td>{{ item['warranty'] }}</td>
+                            <td>{{ item['brand'] }}</td>
+                            <td>{{ item['seller'] }}</td>
+                        </tr>
+                        <tr>
+                            <form action="/edit" method="post">
+                                <input name="id" type="hidden" value="{{ item.id }}">
+                                <td><input autocomplete="off" name="item_name" placeholder="new item's name" type="text"></td>
+                                <td><input autocomplete="off" name="price" placeholder="new price" min="0" type="number" step="any"></td>
+                                <td><input autocomplete="off" name="bought" type="date"></td>
+                                <td><input autocomplete="off" name="life" placeholder="new lifetime (month)" min="1" type="number"></td>
+                                <td><input autocomplete="off" name="maint" type="number" step="any"></td>
+                                <td><input autocomplete="off" name="warranty" type="date"></td>
+                                <td><input autocomplete="off" name="brand" type="text"></td>
+                                <td><input autocomplete="off" name="seller" type="text"></td>
+                                <td><button class="btn btn-info" type="submit">Confirm</button></td>
+                            </form>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        <div style="text-align: left; margin-top: 40px; margin-left: 40px;">
+            <h6>Notes: </h6>
+            <ul>
+                <li><strong>Bought</strong>: the date you bought this item</li>
+                <li><strong>Replace date</strong>: the date you should replace the item due to lifetime (enter number of lifetime in month)</li>
+                <li><strong>MAINT</strong>: Maintenant cost per month for this item</li>
+                <li><strong>Warranty</strong>: is the date your warranty expire</li>
+                <li style="color: red;">The field you skip will stay unchanged</li>
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock %}

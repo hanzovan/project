@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    urgent
+
+{% endblock %}
+{% block main %}
+
+    <div class="container-fluid">
+        {% if items | length < 1 %}
+            No item need to be replaced in 30 days
+        {% else %}
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (USD)</th>
+                        <th>Bought</th>
+                        <th>Used (months)</th>
+                        <th>Replace date</th>
+                        <th>DEPR</th>
+                        <th>MAINT</th>
+                        <th>Book value (USD)</th>
+                        <th>Savings</th>
+                        <th>Warranty</th>
+                        <th>Brand of item</th>
+                        <th>Seller/Shop</th>
+                        <th>Replace item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+
+                        <tr>
+                            <td>{{ item['item'] }}</td>
+                            <td>{{ item['price'] }}</td>
+                            <td>{{ item['bought'] }}</td>
+                            <td>{{ item['used'] }}</td>
+                            <td>{{ item['should_replace'] }}</td>
+                            <td>{{ item['depreciation_per_month'] }}</td>
+                            <td>{{ item['maint'] }}</td>
+                            <td>{{ item['book_value'] }}</td>
+                            <td>{{ item['savings_should_have'] }}</td>
+                            <td>{{ item['warranty'] }}</td>
+                            <td>{{ item['brand'] }}</td>
+                            <td>{{ item['seller'] }}</td>
+                            <td>
+                                <form action="/pre_replace" method="post">
+                                    <input name="id" type="hidden" value="{{item.id}}">
+                                    <button class="btn btn-success" type="submit">Replace</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <div style="text-align: left; margin-top: 40px; margin-left: 40px;">
+            <h6>Notes: </h6>
+            <ul>
+                <li><strong>Bought</strong>: the date you bought this item</li>
+                <li><strong>Used</strong>: number of month you used this item from bought date</li>
+                <li><strong>Replace date</strong>: the date you should replace the item due to lifetime you chose</li>
+                <li><strong>DEPR</strong>: Depreciation per month, this variable is calculated by using the price divided by number of months in item lifetime</li>
+                <li><strong>MAINT</strong>: Maintenant cost per month for this item</li>
+                <li><strong>Book value</strong>: book value of the item is calculated by subtracting depreciation each month to the original price</li>
+                <li><strong>Savings</strong>: savings you should have until current time to prepare for next replacement for the item</li>
+                <li><strong>Warranty</strong>: is the date your warranty expire</li>
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

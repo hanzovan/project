@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %}
+
+    edit wishlist
+
+{% endblock %}
+{% block main %}
+
+    <div class="container-fluid">
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (USD)</th>
+                        <th>Life</th>
+                        <th>MAINT</th>
+                        <th>Brand of item</th>
+                        <th>Seller/Shop</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+
+                        <tr>
+                            <td>{{ item['item'] }}</td>
+                            <td>{{ item['price'] }}</td>
+                            <td>{{ item['life'] }}</td>
+                            <td>{{ item['maint'] }}</td>
+                            <td>{{ item['brand'] }}</td>
+                            <td>{{ item['seller'] }}</td>
+                        </tr>
+                        <tr>
+                            <form action="/edit_wishlist" method="post">
+                                <input name="id" type="hidden" value="{{ item.id }}">
+                                <td><input autocomplete="off" name="item_name" placeholder="new item's name" type="text"></td>
+                                <td><input autocomplete="off" name="price" placeholder="new price" min="0" type="number" step="any"></td>
+                                <td><input autocomplete="off" name="life" placeholder="new lifetime (month)" min="1" type="number"></td>
+                                <td><input autocomplete="off" name="maint" type="number" step="any"></td>
+                                <td><input autocomplete="off" name="brand" type="text"></td>
+                                <td><input autocomplete="off" name="seller" type="text"></td>
+                                <td><button class="btn btn-info" type="submit">Confirm</button></td>
+                            </form>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+        <div style="text-align: left; margin-top: 40px; margin-left: 40px;">
+            <h6>Notes: </h6>
+            <ul>
+                <li><strong>MAINT</strong>: Maintenant cost per month for this item</li>
+                <li style="color: red;">The field you skip will stay unchanged</li>
+            </ul>
+        </div>
+
+    </div>
+
+{% endblock %}
